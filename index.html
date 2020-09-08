@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BNHA Special Moves</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <div class="keys">
+        <div data-key="65" class="key">
+          <kbd>A</kbd>
+          <span class="sound">Izuku's Special Move </span>
+
+        </div>
+        <div data-key="83" class="key">
+          <kbd>S</kbd>
+          <span class="sound">Bakugou's Special Move</span>
+        </div>
+        <div data-key="68" class="key">
+          <kbd>D</kbd>
+          <span class="sound">All Might's Special Move</span>
+        </div>
+        <div data-key="70" class="key">
+          <kbd>F</kbd>
+          <span class="sound">Kirishima's Special Move</span>
+        </div>
+        <div data-key="71" class="key">
+          <kbd>G</kbd>
+          <span class="sound">Endeavor's Special Move</span>
+        </div>
+        <div data-key="72" class="key">
+          <kbd>H</kbd>
+          <span class="sound">Mineta's Special Move</span>
+        </div>
+        <div data-key="74" class="key">
+          <kbd>J</kbd>
+          <span class="sound">Iida's Special Move</span>
+        </div>
+        <div data-key="75" class="key">
+          <kbd>K</kbd>
+          <span class="sound">Mirio's Special Move</span>
+        </div>
+      </div>
+
+      <audio data-key="65" src="sounds/Izuku.wav"></audio>
+      <audio data-key="83" src="sounds/Bakugou.wav"></audio>
+      <audio data-key="68" src="sounds/AllMight.wav"></audio>
+      <audio data-key="70" src="sounds/Kirishima.wav"></audio>
+      <audio data-key="71" src="sounds/Endeavor.wav"></audio>
+      <audio data-key="72" src="sounds/Mineta.wav"></audio>
+      <audio data-key="74" src="sounds/Iida.wav"></audio>
+      <audio data-key="75" src="sounds/Mirio.wav"></audio>
+
+
+<script>
+  
+        function playSound(e) {
+          const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+          const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+          if (!audio) return; // stops the function from running all together
+          audio.currentTime = 0; // rewind to start
+          audio.play();
+          key.classList.add('playing');
+      
+          
+        };
+      
+        function removeTransition(e) {
+          if(e.propertyName !== 'transform') return; // skip if it's not a transform
+          this.classList.remove('playing');
+        }
+      
+        const keys = document.querySelectorAll('.key');
+        keys.forEach(key => key.addEventListener('transitionend', removeTransition))
+        window.addEventListener('keydown', playSound);
+</script>
+
+</body>
+</html>
